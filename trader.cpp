@@ -9,11 +9,12 @@
 
 #include "trader.h"
 
-trader::trader(double gold, double foodAmount, double woodAmount){
+trader::trader(double gold, double foodAmount, double woodAmount, double bid){
 	
 //	gold = 6;
-	desireToBuyFood(foodAmount, gold);
-	
+	globalPrices();
+	desireToBuyFood(foodAmount, gold, bid);
+	weBuyFood(gold,foodAmount);
 
 	
 //	desireToBuyWood(woodAmount, gold);
@@ -21,20 +22,29 @@ trader::trader(double gold, double foodAmount, double woodAmount){
 //	desireToSellWood(woodAmount, gold);
 	
 }
-
-void trader::desireToBuyFood(double foodAmount, double gold){
-	if (gold > 0);
-	cout << "Yes. We buy food." << endl;
+void trader::globalPrices(){
 	globalFoodPrice = 300;
 	globalWoodPrice = 150;
-	foodBuyPrice = globalFoodPrice/foodAmount;
+}
+void trader::desireToBuyFood(double foodAmount, double gold, double bid){
 	
-	cout << foodBuyPrice  << endl;
+//	globalFoodPrice = 300;
+//	globalWoodPrice = 150;
+	DBF = bid*foodAmount/globalFoodPrice;
+	
+	cout << DBF  << endl;
 	cout << globalFoodPrice  << endl;
 	cout << foodAmount  << endl;
-	
-	
-	cout << "I can pay " << foodBuyPrice << " for your food." << endl;
-	
-	
+	if (gold > 0){
+	cout << "Yes. We buy food." << endl;
 }
+}
+
+void trader::weBuyFood(double gold, double foodAmount){
+	buyOfferFood = DBF/100;
+		cout << "I can pay " << buyOfferFood << " for your food." << endl;
+
+}
+	
+		
+
